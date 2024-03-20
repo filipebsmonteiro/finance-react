@@ -71,6 +71,12 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply
+      bg-gradient-to-br from-slate-800 via-slate-700 to-slate-600
+      text-white
+    }
   }
-}
+  
+  #root {
+    @apply h-screen w-screen overflow-auto
+  }

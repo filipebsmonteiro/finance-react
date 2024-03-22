@@ -10,7 +10,7 @@ function App() {
 
   return (
     <div className="flex flex-col overflow-y-auto h-screen bg-gray-100">
-          {element}
+      {element}
     </div>
   )
 }

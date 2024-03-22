@@ -1,12 +1,12 @@
 import { Outlet } from 'react-router-dom'
-import TopMenu from '@/components/navigation/TopMenu'
+import Navbar from '@/components/navigation/Navbar'
 
 function AuthLayout() {
   // const [count, setCount] = useState(0)
 
   return (
     <>
-      <TopMenu />
+      <Navbar />
       <div className='container'>
         <Outlet />
       </div>

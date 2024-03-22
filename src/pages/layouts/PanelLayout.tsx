@@ -1,19 +1,29 @@
 import { Outlet } from 'react-router'
-import LeftMenu from '@/components/navigation/LeftMenu'
-import TopMenu from '@/components/navigation/TopMenu'
+import Sidebar from '@/components/navigation/Sidebar'
+import Navbar from '@/components/navigation/Navbar'
+import { ScrollArea } from '@/components/ui/scroll-area'
+import BreadCrumb from '@/components/navigation/BreadCrumb'
 
 function PanelLayout() {
 
   return (
-    <div className='flex flex-col w-full h-full'>
-      <TopMenu />
-      <div className='flex flex-grow'>
-        <LeftMenu />
-        <div className='container'>
+    <>
+      <Navbar />
+      <div className='flex flex-1'>
+        <Sidebar />
+
+        <ScrollArea className='flex-1 p-4'>
+          <BreadCrumb />
+
+          {/* <div className="flex justify-between items-center mb-6">
+            <p className="text-2xl font-semibold mb-2 lg:mb-0">Hello, Filipe!</p>
+            <button className="bg-blue-500 hover:bg-blue-600 focus:outline-none rounded-lg px-6 py-2 text-white font-semibold shadow">View Info</button>
+          </div> */}
+
           <Outlet />
-        </div>
+        </ScrollArea>
       </div>
-    </div>
+    </>
   )
 }
 

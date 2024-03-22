@@ -16,9 +16,9 @@ import {
 } from "@/components/ui/menubar"
 import viteLogo from '/vite.svg'
 
-function TopMenu() {
+function Navbar() {
     return (
-        <Menubar className="text-inherit justify-between px-2 py-6">
+        <Menubar className="text-inherit justify-between px-2 py-6 bg-blue-100">
             <MenubarMenu>
                 <MenubarLabel className="w-60 flex justify-center">
                     <img src={viteLogo} className="logo" alt="Vite logo" />
@@ -64,4 +64,4 @@ function TopMenu() {
     )
 }
 
-export default TopMenu;
+export default Navbar;

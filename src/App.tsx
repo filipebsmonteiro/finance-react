@@ -9,7 +9,9 @@ function App() {
   const element = useRoutes(routes);
 
   return (
-    element
+    <div className="flex flex-col overflow-y-auto h-screen bg-gray-100">
+          {element}
+    </div>
   )
 }
 

@@ -4,25 +4,23 @@ import { Link } from "react-router-dom"
 
 function LeftMenu() {
   return (
-    <ScrollArea className="w-48 h-full flex flex-grow shadow shadow-black">
-      <nav className="p-4 ">
-        {/* <h4 className="mb-4 text-sm font-medium leading-none">Tags</h4> */}
-        {/* <div className="text-sm"></div> */}
+    <ScrollArea className="w-60 mx-2 my-4 px-2 py-4 bg-gray-800 text-gray-100 rounded-lg">
+      {/* <div className="flex items-center justify-center h-16 bg-gray-900">
+          <span className="text-white font-bold uppercase">Sidebar</span>
+      </div> */}
+      {/* <div className="flex flex-col flex-1 overflow-y-auto rounded"> */}
+          <nav className="">
+              <Link className="hover:bg-gray-700" to="/home">
+                Home
+              </Link>
+              <Separator className="my-2" />
 
-        <Link to="/home">Home</Link>
-        <Separator className="my-2" />
-
-        <Link to="/auth/sigin">Login</Link>
-        <Separator className="my-2" />
-        {/*tags.map((tag) => (
-          <>
-            <div key={tag} className="text-sm">
-              {tag}
-            </div>
-            <Separator className="my-2" />
-          </>
-        ))*/}
-      </nav>
+              <Link className="hover:bg-gray-700" to="/auth/login">
+                Login
+              </Link>
+              <Separator className="my-2" />
+          </nav>
+      {/* </div> */}
     </ScrollArea>
   )
 }

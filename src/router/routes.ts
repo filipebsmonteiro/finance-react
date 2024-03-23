@@ -4,7 +4,7 @@ import AuthLayout from "@/pages/layouts/AuthLayout";
 import PanelLayout from "@/pages/layouts/PanelLayout";
 
 import LoginPage from "@/pages/Auth/LoginPage";
-import HomePage from "@/pages/HomePage";
+import HomePage from "@/pages/DashboardPage";
 import NotFoundPage from "@/pages/Error/NotFoundPage";
 import BalancePage from "@/pages/Finance/BalancePage";
 import IndependencePage from "@/pages/Finance/IndependencePage";

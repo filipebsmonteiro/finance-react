@@ -5,7 +5,6 @@ function FinanceLayout() {
 
   return (
     <>
-      <h1>FinanceLayout</h1>
       <Outlet />
     </>
   )

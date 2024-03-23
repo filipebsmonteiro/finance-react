@@ -3,14 +3,16 @@ import Sidebar from '@/components/navigation/Sidebar'
 import Navbar from '@/components/navigation/Navbar'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import BreadCrumb from '@/components/navigation/BreadCrumb'
+import { useSelector } from "react-redux";
 
 function PanelLayout() {
+  const { open } = useSelector((state: any) => state.sidebar);
 
   return (
     <>
       <Navbar />
       <div className='flex flex-1'>
-        <Sidebar />
+        {open && <Sidebar />}
 
         <ScrollArea className='flex-1 p-4'>
           <BreadCrumb />

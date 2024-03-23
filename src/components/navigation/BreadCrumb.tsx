@@ -23,8 +23,6 @@ function BreadCrumb() {
     }
   });
 
-  console.log('actual :>> ', actual);
-
   return (
     <Breadcrumb className="mb-6">
       <BreadcrumbList>

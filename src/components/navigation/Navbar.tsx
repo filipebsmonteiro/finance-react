@@ -17,7 +17,7 @@ import {
 import viteLogo from '/vite.svg'
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/store";
-import { toggle } from "@/store/sidebar";
+import { toggleSidebar } from "@/store/layout";
 import { Menu } from "lucide-react";
 
 function Navbar() {
@@ -34,7 +34,7 @@ function Navbar() {
             <MenubarMenu>
                 <div className="flex flex-1 justify-between">
                     <MenubarLabel>
-                        <button onClick={() => dispatch(toggle())}>
+                        <button onClick={() => dispatch(toggleSidebar())}>
                             <Menu />
                         </button>
                     </MenubarLabel>

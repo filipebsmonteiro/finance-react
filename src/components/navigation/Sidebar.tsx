@@ -6,7 +6,7 @@ import { BookOpenText, Coffee, LayoutDashboard, LineChart, NotebookTabs } from "
 import { Separator } from "@/components/ui/separator";
 
 function Sidebar() {
-  const { open } = useSelector((state: any) => state.sidebar);
+  const { open } = useSelector((state: any) => state.layout.sidebar);
   return (
     <ScrollArea
       className={`

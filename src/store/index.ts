@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit'
-import sidebar from './sidebar'
+import layout from './layout'
 
 const store = configureStore({
   reducer: {
-    sidebar,
+    layout,
   },
 });
 

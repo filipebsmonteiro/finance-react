@@ -1,8 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
+import balance from './balance'
 import layout from './layout'
 
 const store = configureStore({
   reducer: {
+    balance,
     layout,
   },
 });

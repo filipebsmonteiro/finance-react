@@ -1,15 +1,16 @@
 import { createContext } from "react";
-import { formatter as ptBR } from "./pt-BR/currency";
+import { currency } from "@/app/contexts/pt-BR/numbers";
+import { date } from "@/app/contexts/pt-BR/dateTime";
 
-// import { useState } from "react";
-// const [Default, setDefault] = useState('ptBR');
-// export { setDefault };
+export type IFormatter<Input, Output> = {
+  format: (arg: Input) => Output | never;
+}
 
 export const data = {
   formatters: {
-    ptBR,
+    currency,
+    date
   },
-  formatter: ptBR
 };
 const AppContext = createContext(data)
 

@@ -37,10 +37,10 @@ function PersonalAssetsForm() {
             Sum Total Assets
           </Label>
           <AppContext.Consumer>
-            {({ formatter }) =>
+            {({ formatters: { currency } }) =>
               <InputMoney
                 id="assets"
-                formatter={formatter}
+                formatter={currency}
                 onChange={({ target: { value } }) => assets.current = value}
                 onKeyUp={evt => {
                   evt.key === `Enter`

@@ -24,8 +24,8 @@ function BalancePage() {
 
         <div className="flex items-center">
           <AppContext.Consumer>
-            {({ formatter }) =>
-              <p className="text-blue-500 text-xl">{formatter.format(totalAssets)}</p>
+            {({ formatters : { currency } }) =>
+              <p className="text-blue-500 text-xl">{currency.format(totalAssets)}</p>
             }
           </AppContext.Consumer>
           <Dialog>

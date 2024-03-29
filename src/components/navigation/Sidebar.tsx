@@ -21,11 +21,6 @@ function Sidebar() {
         </Link>
         {/* <Separator /> */}
 
-        {/* <Link className="flex pl-4 p-2 rounded-lg hover:bg-gray-200" to="/auth/login">
-          Login
-        </Link> */}
-        {/* <Separator className="mx-4 w-[85%]"  /> */}
-
         {open ? <p className="pl-2 font-semibold mt-4 mb-1">Finance</p> : <Separator  />}
         <Link className="flex pl-4 py-2 rounded-lg hover:bg-gray-200" to="/finance/balance">
           <Coffee className="mr-4" /> Balance

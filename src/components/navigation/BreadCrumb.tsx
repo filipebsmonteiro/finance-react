@@ -24,7 +24,7 @@ function BreadCrumb() {
   });
 
   return (
-    <Breadcrumb className="mb-6">
+    <Breadcrumb className="mb-3">
       <BreadcrumbList>
         
         {

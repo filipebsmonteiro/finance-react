@@ -4,8 +4,8 @@ import { setTitle } from "@/store/layout";
 import { Edit } from "lucide-react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import PersonalAssetsForm from "./PersonalAssetsPage";
-import AppContext from "@/contexts";
+import PersonalAssetsForm from "./PersonalAssetsForm";
+import AppContext from "@/app/contexts";
 
 
 function BalancePage() {

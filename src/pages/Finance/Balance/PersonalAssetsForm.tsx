@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/dialog"
 import { InputMoney } from "@/components/ui/input-money"
 import { Label } from "@/components/ui/label"
-import AppContext from "@/contexts"
+import AppContext from "@/app/contexts"
 import { setAssets } from "@/store/balance"
 import { DialogClose } from "@radix-ui/react-dialog"
 import { BaseSyntheticEvent, useRef } from "react"

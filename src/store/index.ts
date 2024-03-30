@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
-import balance from './balance'
-import layout from './layout'
+import auth from '@/store/auth'
+import balance from '@/store/balance'
+import layout from '@/store/layout'
 
 const store = configureStore({
   reducer: {
+    auth,
     balance,
     layout,
   },

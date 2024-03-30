@@ -5,7 +5,7 @@ import { Edit } from "lucide-react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PersonalAssetsForm from "./PersonalAssetsForm";
-import AppContext from "@/app/contexts";
+import AppContext from "@/app/providers";
 
 
 function BalancePage() {

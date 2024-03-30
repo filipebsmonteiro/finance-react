@@ -4,7 +4,7 @@ import { Provider } from 'react-redux'
 import store from './store'
 import { BrowserRouter } from 'react-router-dom'
 import App from './App.tsx'
-import AppContext, { data } from "@/app/contexts";
+import AppContext, { data } from "@/app/providers";
 
 
 

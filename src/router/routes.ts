@@ -6,6 +6,7 @@ import PanelLayout from "@/pages/layouts/PanelLayout";
 import LoginPage from "@/pages/Auth/LoginPage";
 import HomePage from "@/pages/DashboardPage";
 import NotFoundPage from "@/pages/Error/NotFoundPage";
+import AssetsPage from "@/pages/Finance/AssetsPage";
 import BalancePage from "@/pages/Finance/Balance/BalancePage";
 import IndependencePage from "@/pages/Finance/IndependencePage";
 import IPCAPage from "@/pages/Finance/IPCAPage";
@@ -43,7 +44,13 @@ const routes: Array<RouteObject> = [
           {
             id: `Balance`,
             path: `balance`,
+            index: true,
             Component: BalancePage,
+          },
+          {
+            id: `Assets`,
+            path: `assets`,
+            Component: AssetsPage,
           },
           {
             id: `Independence`,

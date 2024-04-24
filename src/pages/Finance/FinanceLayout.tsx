@@ -1,10 +1,20 @@
-import { Outlet } from "react-router-dom"
+import { data } from "@/app/providers";
+import { Outlet, Navigate, useLocation } from "react-router-dom"
 
 function FinanceLayout() {
-  // const [count, setCount] = useState(0)
+  const location = useLocation();
+  const { getRoute } = data;
+  const route = getRoute(location);
+  if (route.id === `Finance`) {
+    Navigate({ to: `/finance/balance`})
+  }
 
   return (
     <>
+      {/* {route.id === `Finance` && <>
+        <Link to="assets">Personal Assets</Link><br/>
+        <Link to="balance">Balance</Link>
+      </>} */}
       <Outlet />
     </>
   )

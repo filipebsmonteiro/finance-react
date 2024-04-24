@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { v4 as uuid } from 'uuid'
 
-type BalanceRecord = {
+export type BalanceRecord = {
   id: string;
   name: string;
   type: 'Income' | 'Outcome';
@@ -15,7 +15,20 @@ export type BalanceState = {
 
 const initialState: BalanceState = {
   totalAssets: 0,
-  records: [],
+  records: [
+    {
+      id: `1`,
+      name: `INCOME`,
+      type: 'Income',
+      value: 500
+    },
+    {
+      id: `2`,
+      name: `Outcome`,
+      type: 'Outcome',
+      value: 300
+    }
+  ],
 }
 
 export const layout = createSlice({

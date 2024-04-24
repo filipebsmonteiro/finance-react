@@ -2,7 +2,7 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 // import { Separator } from "@/components/ui/separator"
 import { Link } from "react-router-dom"
 import { useSelector } from "react-redux"
-import { BookOpenText, Coffee, LayoutDashboard, LineChart, NotebookTabs } from "lucide-react";
+import { BookOpenText, Coffee, LayoutDashboard, LineChart, NotebookTabs, DollarSign } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 
 function Sidebar() {
@@ -22,9 +22,13 @@ function Sidebar() {
         {/* <Separator /> */}
 
         {open ? <p className="pl-2 font-semibold mt-4 mb-1">Finance</p> : <Separator  />}
+        <Link className="flex pl-4 py-2 rounded-lg hover:bg-gray-200" to="/finance/assets">
+          <DollarSign className="mr-4" /> Personal Assets
+        </Link>
         <Link className="flex pl-4 py-2 rounded-lg hover:bg-gray-200" to="/finance/balance">
           <Coffee className="mr-4" /> Balance
         </Link>
+
         <Link className="flex pl-4 py-2 rounded-lg hover:bg-gray-200" to="/finance/independence">
           <LineChart className="mr-4" /> Independence
         </Link>

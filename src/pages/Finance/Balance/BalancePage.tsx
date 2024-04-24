@@ -1,45 +1,50 @@
-import { Button } from "@/components/ui/button";
-import { Dialog, DialogTrigger } from "@/components/ui/dialog";
+import AppContext, { data } from "@/app/providers";
+import { BalanceRecord } from "@/store/balance";
 import { setTitle } from "@/store/layout";
-import { Edit } from "lucide-react";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import PersonalAssetsForm from "./PersonalAssetsForm";
-import AppContext from "@/app/providers";
-
+import { Link, useLocation } from "react-router-dom";
 
 function BalancePage() {
-  const { totalAssets } = useSelector((state: any) => state.balance);
-  // const contextType = AppContext.Consumer
+  const location = useLocation();
+  const { getRoute } = data;
+  const route = getRoute(location);
+  const { totalAssets, records } = useSelector((state: any) => state.balance);
+  const totalExit = useRef(0);
+  const totalEntrance = useRef(0);
+
+  records.map((record: BalanceRecord) =>
+    record.type === `Income`
+    ? totalEntrance.current += record.value
+    : totalExit.current += record.value
+  );
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(setTitle('Balance (Entrance | Exits)'));
+    dispatch(setTitle('Balance Information'));
   })
 
   return (
     <>
+      <AppContext.Consumer>
+        {({ formatters : { currency } }) =>
+          <>
+            <p className="text-xl">
+              Total: <span className="text-blue-500">{currency.format(totalAssets)}</span>
+            </p>
+            <p className="text-xl">
+              Monthly: <span className="text-blue-500">{currency.format(totalEntrance.current - totalExit.current)}</span>
+            </p>
+          </>
+        }
+      </AppContext.Consumer>
       <div className="flex justify-between items-center mb-6">
-        <p className="text-xl">Personal Assets</p>
+      {route.id === `Finance` && <>
+        <Redirect to="assets">Personal Assets</Redirect><br/>
+        <Link to="balance">Balance</Link>
+      </>}
 
-        <div className="flex items-center">
-          <AppContext.Consumer>
-            {({ formatters : { currency } }) =>
-              <p className="text-blue-500 text-xl">{currency.format(totalAssets)}</p>
-            }
-          </AppContext.Consumer>
-          <Dialog>
-            <DialogTrigger asChild>
-              <Button
-                className="ml-4 p-1 bg-transparent hover:bg-transparent hover:text-blue-500"
-                variant="outline"
-              >
-                <Edit />
-              </Button>
-            </DialogTrigger>
-            <PersonalAssetsForm />
-          </Dialog>
-        </div>
+        
         {/* <button className="bg-blue-500 hover:bg-blue-600 focus:outline-none rounded-lg px-6 py-2 text-white font-semibold shadow">View Info</button> */}
       </div>
     </>

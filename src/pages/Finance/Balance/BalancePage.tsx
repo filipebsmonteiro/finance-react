@@ -1,3 +1,4 @@
+import constants from "@/app/constants";
 import AppContext, { data } from "@/app/providers";
 import { BalanceRecord } from "@/store/balance";
 import { setTitle } from "@/store/layout";
@@ -14,7 +15,7 @@ function BalancePage() {
   const totalEntrance = useRef(0);
 
   records.map((record: BalanceRecord) =>
-    record.type === `Income`
+    record.type === constants.FINANCE.BALANCE.INCOME
     ? totalEntrance.current += record.value
     : totalExit.current += record.value
   );

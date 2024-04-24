@@ -1,3 +1,5 @@
+import AssetsRepository from '@/app/data/repositories/Finance/AssetsRepository';
+import BalanceRepository from '@/app/data/repositories/Finance/BalanceRepository';
 import { createSlice } from '@reduxjs/toolkit'
 import { v4 as uuid } from 'uuid'
 
@@ -15,26 +17,25 @@ export type BalanceState = {
 
 const initialState: BalanceState = {
   totalAssets: 0,
-  records: [
-    {
-      id: `1`,
-      name: `INCOME`,
-      type: 'Income',
-      value: 500
-    },
-    {
-      id: `2`,
-      name: `Outcome`,
-      type: 'Outcome',
-      value: 300
-    }
-  ],
+  records: [],
 }
 
 export const layout = createSlice({
   name: 'balance',
   initialState,
   reducers: {
+    loadAssets: (state) => {
+      AssetsRepository.get()
+        .then((asset) => {
+          state.totalAssets = asset as number
+        });
+    },
+    loadBalance: (state) => {
+      BalanceRepository.get()
+        .then((records) => {
+          state.records = records as BalanceRecord[]
+        }); 
+    },
     setAssets: (state, { payload }) => {
       state.totalAssets = payload;
     },
@@ -51,6 +52,6 @@ export const layout = createSlice({
 })
 
 export const { actions, selectors } = layout
-export const { setAssets, addRecord, removeRecord } = actions
+export const { setAssets, loadAssets, loadBalance, addRecord, removeRecord } = actions
 
 export default layout.reducer

@@ -1,6 +1,6 @@
 import { FirebaseRepository } from "@/app/data/repositories/FirebaseRepository";
 
-class PatrimonyRepository extends FirebaseRepository {
+class AssetsRepository extends FirebaseRepository {
   constructor() {
     super(`patrimony/$userId`);
     this.oneToMany = false;
@@ -8,4 +8,4 @@ class PatrimonyRepository extends FirebaseRepository {
 
 }
 
-export default new PatrimonyRepository()
+export default new AssetsRepository()

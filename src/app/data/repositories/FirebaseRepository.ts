@@ -1,6 +1,6 @@
 import { DatabaseReference, child, get, push, ref, remove, set } from "firebase/database";
 import Firebase from "@/app/providers/firebase";
-import Store from "@/store";
+// import Store from "@/store";
 
 
 export class FirebaseRepository {
@@ -11,12 +11,13 @@ export class FirebaseRepository {
 
   constructor(path: string) {
     // const { user } = useSelector((state: any) => state.auth)
-    const { auth: { user } } = Store.getState()
-    this.userId = user?.uid; // Firebase.auth.currentUser.uid;
+    // const { auth: { user } } = Store.getState()
+    // this.userId = user?.uid; // Firebase.auth.currentUser.uid;
 
     if (!path) console.error(`Defina o Path para a Classe que herda FirebaseRepository`);
     this.firebasePath = path.includes('$userId')
-      ? path.split('$userId').join(`${this.userId}`)
+      // ? path.split('$userId').join(`${this.userId}`)
+      ? path.split('$userId').join(`ty1z7eNhuEetPOAOa72DuIZjVpK2`)
       : path;
     this.firebaseRef = ref(Firebase.database, `${this.firebasePath}`);
     this.oneToMany = true;

@@ -4,9 +4,10 @@ import { Link } from "react-router-dom"
 import { useSelector } from "react-redux"
 import { BookOpenText, Coffee, LayoutDashboard, LineChart, NotebookTabs, DollarSign } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
+import { RootState } from "@/store/state";
 
 function Sidebar() {
-  const { open } = useSelector((state: any) => state.layout.sidebar);
+  const { open } = useSelector((state: RootState) => state.layout.sidebar);
   return (
     <ScrollArea
       className={`

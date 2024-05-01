@@ -1,16 +1,22 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { LayoutState } from './state';
+
+const initialState: LayoutState = {
+  sidebar: {
+    open: true,
+  },
+  header: {
+    title: null,
+    button: {
+      action: null,
+      label: null,
+    },
+  }
+};
 
 export const layout = createSlice({
   name: 'layout',
-  initialState: {
-    sidebar: {
-      open: true,
-    },
-    header: {
-      title: null,
-      button: null,
-    }
-  },
+  initialState,
   reducers: {
     toggleSidebar: (state) => {
       state.sidebar.open = !state.sidebar.open;

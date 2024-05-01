@@ -1,7 +1,7 @@
 import constants from "@/app/constants";
 import AppContext, { data } from "@/app/providers";
-import { BalanceRecord } from "@/store/balance";
 import { setTitle } from "@/store/layout";
+import { RootState } from "@/store/state";
 import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
@@ -10,11 +10,11 @@ function BalancePage() {
   const location = useLocation();
   const { getRoute } = data;
   const route = getRoute(location);
-  const { totalAssets, records } = useSelector((state: any) => state.balance);
+  const { totalAssets, records } = useSelector((state: RootState) => state.balance);
   const totalExit = useRef(0);
   const totalEntrance = useRef(0);
 
-  records.map((record: BalanceRecord) =>
+  records.map((record) =>
     record.type === constants.FINANCE.BALANCE.INCOME
     ? totalEntrance.current += record.value
     : totalExit.current += record.value

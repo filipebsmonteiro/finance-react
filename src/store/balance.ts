@@ -2,18 +2,7 @@ import AssetsRepository from '@/app/data/repositories/Finance/AssetsRepository';
 import BalanceRepository from '@/app/data/repositories/Finance/BalanceRepository';
 import { createSlice } from '@reduxjs/toolkit'
 import { v4 as uuid } from 'uuid'
-
-export type BalanceRecord = {
-  id: string;
-  name: string;
-  type: 'Income' | 'Outcome';
-  value: number;
-};
-
-export type BalanceState = {
-  totalAssets: number;
-  records: BalanceRecord[];
-}
+import { BalanceRecord, BalanceState } from './state';
 
 const initialState: BalanceState = {
   totalAssets: 0,

@@ -6,10 +6,11 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PersonalAssetsForm from "./Balance/PersonalAssetsForm";
 import AppContext from "@/app/providers";
+import { RootState } from "@/store/state";
 
 
 function BalancePage() {
-  const { totalAssets } = useSelector((state: any) => state.balance);
+  const { totalAssets } = useSelector((state: RootState) => state.balance);
   // const contextType = AppContext.Consumer
 
   const dispatch = useDispatch();

@@ -12,14 +12,16 @@ import { setAssets } from "@/store/balance"
 import { DialogClose } from "@radix-ui/react-dialog"
 import { BaseSyntheticEvent, useRef } from "react"
 import { useDispatch, useSelector } from "react-redux"
+import { RootState } from "@/store/state"
 
 
 function PersonalAssetsForm() {
-  const { totalAssets } = useSelector((state: any) => state.balance)
+  const { totalAssets } = useSelector((state: RootState) => state.balance)
   const assets = useRef(totalAssets || '0');
   const dispatch = useDispatch();
 
   const handleSubmit = (evt: BaseSyntheticEvent) => {
+    evt.preventDefault();
     dispatch(setAssets(assets.current))
   };
 

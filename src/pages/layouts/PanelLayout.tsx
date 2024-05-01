@@ -6,9 +6,10 @@ import Navbar from '@/components/navigation/Navbar'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import BreadCrumb from '@/components/navigation/BreadCrumb'
 import { useEffect } from 'react'
+import { RootState } from '@/store/state'
 
 function PanelLayout() {
-  const { title } = useSelector((state: any) => state.layout.header);
+  const { title } = useSelector((state: RootState) => state.layout.header);
 
   const location = useLocation();
   const dispatch = useDispatch();

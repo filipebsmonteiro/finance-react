@@ -1,12 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 import AuthRepository from "@/app/data/repositories/AuthRepository";
-import { User } from 'firebase/auth';
+import { AuthState } from './state';
 
-const initialState: {
-  loading: boolean;
-  token: string | null;
-  user: User | null;
-} = {
+const initialState: AuthState = {
   loading: false,
   token: null,
   user: null,
@@ -58,6 +54,6 @@ export const layout = createSlice({
 })
 
 export const { actions, selectors } = layout
-export const { toggleSidebar, setTitle } = actions
+export const { login, logout } = actions
 
 export default layout.reducer

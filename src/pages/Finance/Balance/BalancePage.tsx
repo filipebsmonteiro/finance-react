@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 
 function BalancePage() {
+  const dispatch = useDispatch();
   const location = useLocation();
   const { getRoute } = data;
   const route = getRoute(location);
@@ -20,7 +21,6 @@ function BalancePage() {
     : totalExit.current += record.value
   );
 
-  const dispatch = useDispatch();
   useEffect(() => {
     dispatch(setTitle('Balance Information'));
   })
@@ -36,6 +36,13 @@ function BalancePage() {
             <p className="text-xl">
               Monthly: <span className="text-blue-500">{currency.format(totalEntrance.current - totalExit.current)}</span>
             </p>
+            {records.map(record => {
+              return (
+                <p key={record.id} className={record.type === constants.FINANCE.BALANCE.INCOME ? `text-green-400` : `text-red-400`}>
+                  {record.name}: {currency.format(record.value)}
+                </p>
+              )
+            })}
           </>
         }
       </AppContext.Consumer>

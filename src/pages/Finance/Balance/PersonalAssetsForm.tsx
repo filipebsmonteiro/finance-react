@@ -21,7 +21,7 @@ function PersonalAssetsForm() {
   const dispatch = useDispatch();
 
   const handleSubmit = (evt: BaseSyntheticEvent) => {
-    evt.preventDefault();
+    evt.stopPropagation();
     dispatch(setAssets(assets.current))
   };
 

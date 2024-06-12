@@ -9,11 +9,10 @@ import AppContext from "@/app/providers";
 import { RootState } from "@/store/state";
 
 
-function BalancePage() {
-  const { totalAssets } = useSelector((state: RootState) => state.balance);
-  // const contextType = AppContext.Consumer
-
+function AssetsPage() {
   const dispatch = useDispatch();
+  const { totalAssets } = useSelector((state: RootState) => state.balance);
+
   useEffect(() => {
     dispatch(setTitle('Assets'));
   })
@@ -47,4 +46,4 @@ function BalancePage() {
   )
 }
 
-export default BalancePage
+export default AssetsPage

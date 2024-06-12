@@ -21,7 +21,7 @@ const routes: Array<RouteObject> = [
     children: [
       {
         id: `Login`,
-        path: `sigin`,
+        path: `login`,
         Component: LoginPage,
       }
     ],

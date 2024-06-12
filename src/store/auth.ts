@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import AuthRepository from "@/app/data/repositories/AuthRepository";
+import store from "@/store";
 import { AuthState } from './state';
 
 const initialState: AuthState = {
@@ -12,23 +13,30 @@ export const layout = createSlice({
   name: 'auth',
   initialState,
   reducers: {
+    setToken: (state, { payload }) => {
+      state.token = payload;
+    },
+    setUser: (state, { payload }) => {
+      state.user = payload;
+    },
+
     login: (state, { payload: { provider } }) => {
       state.loading = true
       try {
         AuthRepository.login(provider)
-          .then((result) => {
-            // This gives you a Google Access Token. You can use it to access the Google API.
-            const credential = provider.credentialFromResult(result);
-            state.token = credential.accessToken;
-    
+          .then(async (credentials) => {
             // The signed-in user info.
-            state.user = result.user;
+            store.dispatch({ type: `auth/setUser`, payload: credentials.user.toJSON() });
+            credentials.user.getIdToken()
+              .then(token => store.dispatch({ type: `auth/setToken`, payload: token }));
             // SessionStorage.set(constants.storage.session.USER, result.user)
             // SessionStorage.set(constants.storage.session.AUTH_TOKEN, credential.accessToken)
             // SessionStorage.set(constants.storage.session.AUTH_EXPIRATION, result._tokenResponse.oauthExpireIn)
           })
     
       } catch (error) {
+        console.log('error :>> ', error);
+        console.error(error);
         // Handle Errors here.
         // const errorCode = error.code;
         // const errorMessage = error.message;
@@ -51,9 +59,9 @@ export const layout = createSlice({
         })
     }
   },
-})
+});
 
 export const { actions, selectors } = layout
-export const { login, logout } = actions
+export const { login, logout, setToken, setUser } = actions
 
 export default layout.reducer

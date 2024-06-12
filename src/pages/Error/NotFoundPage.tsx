@@ -3,7 +3,7 @@ function NotFoundPage() {
 
   return (
     <>
-      <h1>Page NotFound</h1>
+      <h1>Page Not Found, please access other page through side-menu</h1>
     </>
   )
 }

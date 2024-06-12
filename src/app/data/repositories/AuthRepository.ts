@@ -1,27 +1,38 @@
 import {
+  AuthProvider,
   FacebookAuthProvider,
   GithubAuthProvider,
   GoogleAuthProvider,
   OAuthProvider,
+  reauthenticateWithPopup,
   signInWithPopup,
+  signInWithRedirect,
   signOut,
   TwitterAuthProvider,
   UserCredential,
 } from "firebase/auth";
 import Firebase from "@/app/providers/firebase";
 
-class AuthRepository {
-  login(provider: string): Promise<UserCredential> {
-    let ProviderClass: any = null;
-    if (provider === `google`) ProviderClass = GoogleAuthProvider;
-    if (provider === `facebook`) ProviderClass = FacebookAuthProvider;
-    if (provider === `apple`) ProviderClass = OAuthProvider;
-    if (provider === `github`) ProviderClass = GithubAuthProvider;
-    if (provider === `microsoft`) ProviderClass = OAuthProvider;
-    if (provider === `twitter`) ProviderClass = TwitterAuthProvider;
 
-    const providerInstance = new ProviderClass();
-    return signInWithPopup(Firebase.auth, providerInstance);
+class AuthRepository {
+  async login(provider: string): Promise<UserCredential> {
+    // provider = `apple`, `microsoft`
+    let ProviderClass: AuthProvider = new OAuthProvider(provider);
+    
+    if (provider === `google`) ProviderClass = new GoogleAuthProvider();
+    // if (provider === `facebook`) ProviderClass = new FacebookAuthProvider();
+    // if (provider === `github`) ProviderClass = new GithubAuthProvider();
+    // if (provider === `twitter`) ProviderClass = new TwitterAuthProvider();
+    
+    // const ProviderClass: AuthProvider = new GoogleAuthProvider();
+    // const credentials = await signInWithPopup(Firebase.auth, ProviderClass)
+    //   .then(result => console.log(result))
+    //   .catch((err) => console.log('err :>> ', err));
+    // return new Promise<UserCredential>(resolve => resolve(credentials))
+
+    // return reauthenticateWithPopup(Firebase.auth, ProviderClass);
+    return signInWithPopup(Firebase.auth, ProviderClass);
+    // return signInWithRedirect(Firebase.auth, ProviderClass);
   }
 
   logout() {

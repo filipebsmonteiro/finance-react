@@ -42,15 +42,15 @@ const routes: Array<RouteObject> = [
         Component: FinanceLayout,
         children: [
           {
+            id: `Assets`,
+            path: `assets`,
+            Component: AssetsPage,
+          },
+          {
             id: `Balance`,
             path: `balance`,
             index: true,
             Component: BalancePage,
-          },
-          {
-            id: `Assets`,
-            path: `assets`,
-            Component: AssetsPage,
           },
           {
             id: `Independence`,

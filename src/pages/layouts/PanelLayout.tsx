@@ -1,4 +1,4 @@
-import { Outlet, useLocation } from 'react-router'
+import { Outlet, useLocation, Navigate } from 'react-router'
 import { useSelector, useDispatch } from 'react-redux'
 import { setTitle } from "@/store/layout"
 import Sidebar from '@/components/navigation/Sidebar'
@@ -15,7 +15,10 @@ function PanelLayout() {
   const dispatch = useDispatch();
   useEffect(() => { 
       return () => {dispatch(setTitle(null))}
-  }, [location])
+  }, [location]);
+
+  const { token } = useSelector((state: RootState) => state.auth);
+  if (!token) return <Navigate to="/auth/login" />;
 
 
   return (

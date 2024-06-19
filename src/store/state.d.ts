@@ -9,8 +9,8 @@ export type AuthState = {
 export type BalanceRecord = {
   id: string;
   name: string;
-  type: 'Income' | 'Outcome';
-  value: number;
+  type: 'income' | 'expense';
+  amount: number;
 };
 
 export type BalanceState = {

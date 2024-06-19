@@ -1,6 +1,6 @@
 import { DatabaseReference, child, get, push, ref, remove, set } from "firebase/database";
 import Firebase from "@/app/providers/firebase";
-// import Store from "@/store";
+import store from "@/store";
 
 
 export class FirebaseRepository {
@@ -10,15 +10,9 @@ export class FirebaseRepository {
   protected oneToMany: boolean;
 
   constructor(path: string) {
-    // const { user } = useSelector((state: any) => state.auth)
-    // const { auth: { user } } = Store.getState()
-    // this.userId = user?.uid; // Firebase.auth.currentUser.uid;
-
     if (!path) console.error(`Defina o Path para a Classe que herda FirebaseRepository`);
-    this.firebasePath = path.includes('$userId')
-      // ? path.split('$userId').join(`${this.userId}`)
-      ? path.split('$userId').join(`ty1z7eNhuEetPOAOa72DuIZjVpK2`)
-      : path;
+    
+    this.firebasePath = path
     this.firebaseRef = ref(Firebase.database, `${this.firebasePath}`);
     this.oneToMany = true;
   }
@@ -27,7 +21,17 @@ export class FirebaseRepository {
     return Object.entries(obj).map(([id, value]) => ({ id, ...value }));
   }
 
-  get() {
+  setPathAndRef() {
+    if (this.firebasePath.includes('_userId')) {
+      const { auth: { currentUser: user } } = Firebase;
+      this.firebasePath = this.firebasePath.split('_userId').join(user?.uid)
+      this.firebaseRef = ref(Firebase.database, `${this.firebasePath}`);
+    }
+  }
+
+  get<T>(): Promise<T | null | Array<unknown>> {
+    this.setPathAndRef();
+
     return new Promise((resolve, reject) => {
       get(child(ref(Firebase.database), `${this.firebasePath}`))
         .then((snapshot) => {
@@ -43,7 +47,9 @@ export class FirebaseRepository {
     })
   }
 
-  post(params: unknown): Promise<void> | Promise<void>[] { 
+  post(params: unknown): Promise<void> | Promise<void>[] {
+    this.setPathAndRef();
+
     if (Array.isArray(params)) {
       return params.map(childToBeAdded => {
         return set(push(this.firebaseRef), childToBeAdded);
@@ -56,10 +62,14 @@ export class FirebaseRepository {
   }
 
   put(id: string | number, params: unknown): Promise<void> {
+    this.setPathAndRef();
+
     return set(ref(Firebase.database, `${this.firebasePath}/${id}`), params)
   }
 
   delete(id: string | number): Promise<void> {
+    this.setPathAndRef();
+
     return remove(ref(Firebase.database, `${this.firebasePath}/${id}`))
   }
 

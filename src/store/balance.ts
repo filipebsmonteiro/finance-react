@@ -15,14 +15,11 @@ export const layout = createSlice({
   initialState,
   reducers: {
     loadAssets: () => {
-      console.log('loadAssets :>> ');
       AssetsRepository.get()
         .then((asset) => {
-          console.log('asset :>> ', asset);
           store.dispatch({ type: 'balance/setAssets', payload: asset })
         })
         .catch(error => console.log('error :>> ', error));
-        console.log('aki :>> ');
     },
     loadBalance: () => {
       BalanceRepository.get<BalanceRecord[]>()
@@ -32,7 +29,6 @@ export const layout = createSlice({
         });
     },
     setAssets: (state, { payload }) => {
-      console.log('payload :>> ', payload);
       state.totalAssets = payload;
     },
     resetRecord: (state) => {

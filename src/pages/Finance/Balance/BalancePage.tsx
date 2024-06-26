@@ -19,26 +19,13 @@ interface RecordScreenI extends BalanceRecord {
 function BalancePage() {
   const dispatch = useDispatch();
 
-  const { records: storeRecords } = useSelector((state: RootState) => state.balance);
-  const [totalExpenses, setTotalExpenses] = useState(0);
-  const [totalIncome, setTotalIncome] = useState(0);
+  const { records: storeRecords, totalIncomes, totalExpenses } = useSelector((state: RootState) => state.balance);
   const [records, setRecords] = useState<RecordScreenI[]>([]);
   const newRecord = useRef<BalanceRecord>();
 
   useEffect(() => {
     dispatch(setTitle('Balance Information'));
-    dispatch(loadBalance())
-
-    setTotalExpenses(
-      () => storeRecords
-        .filter((record) => record.type === constants.FINANCE.BALANCE.EXPENSE)
-        .reduce((acc, curr) => acc + curr.amount, 0)
-    );
-    setTotalIncome(
-      () => storeRecords
-        .filter((record) => record.type === constants.FINANCE.BALANCE.INCOME)
-        .reduce((acc, curr) => acc + curr.amount, 0)
-    );
+    dispatch(loadBalance());
     setRecords(
       () => storeRecords.map((record) => ({...record, isEditing: false }))
     );
@@ -48,7 +35,7 @@ function BalancePage() {
       amount: 0,
       description: ''
     };
-  }, [dispatch, storeRecords]);
+  }, [dispatch]);
 
   const toggleEdit = (record: RecordScreenI) => {
     setRecords(
@@ -92,7 +79,7 @@ function BalancePage() {
         {({ formatters : { currency } }) =>
           <>
             <p className="text-xl">
-              Monthly: <span className="text-blue-500">{currency.format(totalIncome - totalExpenses)}</span>
+              Monthly: <span className="text-blue-500">{currency.format(totalIncomes - totalExpenses)}</span>
             </p>
             {records.map(record => {
               return (

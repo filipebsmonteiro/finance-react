@@ -15,6 +15,8 @@ export type BalanceRecord = {
 
 export type BalanceState = {
   totalAssets: number;
+  totalIncomes: number;
+  totalExpenses: number;
   records: BalanceRecord[];
 };
 

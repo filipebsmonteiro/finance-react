@@ -3,9 +3,12 @@ import BalanceRepository from '@/app/data/repositories/Finance/BalanceRepository
 import { createSlice } from '@reduxjs/toolkit'
 import { BalanceRecord, BalanceState } from './state';
 import store from '@/store';
+import constants from '@/app/constants';
 
 const initialState: BalanceState = {
   totalAssets: 0,
+  totalIncomes: 0,
+  totalExpenses: 0,
   records: [],
 }
 
@@ -43,6 +46,15 @@ export const layout = createSlice({
         ...payload,
         amount: parseFloat(payload.amount),
       });
+      // state.totalIncomes = 0
+      // state.totalExpenses = 0
+      state.totalIncomes = state.records
+        .filter((record) => record.type === constants.FINANCE.BALANCE.INCOME)
+        .reduce((acc, curr) => acc + curr.amount, 0)
+      state.totalExpenses = state.records
+        .filter((record) => record.type === constants.FINANCE.BALANCE.EXPENSE)
+        .reduce((acc, curr) => acc + curr.amount, 0)
+
     },
     updateRecord: (_state, { payload }) => {
       const { id, ...record } = payload;

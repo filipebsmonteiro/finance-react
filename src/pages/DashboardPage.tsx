@@ -1,4 +1,5 @@
 import AppContext from "@/app/providers";
+import IncomesExpenses from "@/components/charts/IncomesExpenses";
 import { loadBalance } from "@/store/balance";
 import { RootState } from "@/store/state";
 import { useEffect } from "react";
@@ -28,6 +29,8 @@ function DashboardPage() {
             <p className="text-red-400">{currency.format(totalExpenses)}</p>
           </div>
         </div>
+
+        <IncomesExpenses />
       </>}
     </AppContext.Consumer>
   )

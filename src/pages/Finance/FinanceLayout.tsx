@@ -1,6 +1,4 @@
 import { data } from "@/app/providers";
-import { loadAssets, loadBalance } from "@/store/balance";
-import { useDispatch } from "react-redux";
 import { Outlet, Navigate, useLocation } from "react-router-dom"
 
 function FinanceLayout() {
@@ -10,11 +8,6 @@ function FinanceLayout() {
   if (route.id === `Finance`) {
     Navigate({ to: `/finance/balance`})
   }
-
-  const dispatch = useDispatch();
-
-  dispatch(loadAssets())
-  dispatch(loadBalance())
 
   return (
     <>

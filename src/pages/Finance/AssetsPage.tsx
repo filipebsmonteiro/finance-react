@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import PersonalAssetsForm from "./Balance/PersonalAssetsForm";
 import AppContext from "@/app/providers";
 import { RootState } from "@/store/state";
+import { loadAssets } from "@/store/balance";
 
 
 function AssetsPage() {
@@ -15,6 +16,7 @@ function AssetsPage() {
 
   useEffect(() => {
     dispatch(setTitle('Assets'));
+    dispatch(loadAssets())
   })
 
   return (

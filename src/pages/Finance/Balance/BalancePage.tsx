@@ -1,7 +1,7 @@
 import constants from "@/app/constants";
 import AppContext from "@/app/providers";
 import { setTitle } from "@/store/layout";
-import { createRecord, updateRecord, deleteRecord } from "@/store/balance";
+import { createRecord, updateRecord, deleteRecord, loadBalance } from "@/store/balance";
 import { BalanceRecord, RootState } from "@/store/state";
 import { FormEvent, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,7 +19,7 @@ interface RecordScreenI extends BalanceRecord {
 function BalancePage() {
   const dispatch = useDispatch();
 
-  const { totalAssets, records: storeRecords } = useSelector((state: RootState) => state.balance);
+  const { records: storeRecords } = useSelector((state: RootState) => state.balance);
   const [totalExpenses, setTotalExpenses] = useState(0);
   const [totalIncome, setTotalIncome] = useState(0);
   const [records, setRecords] = useState<RecordScreenI[]>([]);
@@ -27,7 +27,8 @@ function BalancePage() {
 
   useEffect(() => {
     dispatch(setTitle('Balance Information'));
-    
+    dispatch(loadBalance())
+
     setTotalExpenses(
       () => storeRecords
         .filter((record) => record.type === constants.FINANCE.BALANCE.EXPENSE)
@@ -90,9 +91,6 @@ function BalancePage() {
       <AppContext.Consumer>
         {({ formatters : { currency } }) =>
           <>
-            <p className="text-xl">
-              Total: <span className="text-blue-500">{currency.format(totalAssets)}</span>
-            </p>
             <p className="text-xl">
               Monthly: <span className="text-blue-500">{currency.format(totalIncome - totalExpenses)}</span>
             </p>

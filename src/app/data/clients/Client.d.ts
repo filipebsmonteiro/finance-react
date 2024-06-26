@@ -1,10 +1,10 @@
 // Modification of AxiosResponse
-export interface Response<T = any> {
+export interface Response<T = never> {
   data: T;
-  status: number;
-  statusText: string;
-  headers: object;
-  config: object;
+  status?: number;
+  statusText?: string;
+  headers?: object;
+  config?: object;
   request?: any;
 }
 

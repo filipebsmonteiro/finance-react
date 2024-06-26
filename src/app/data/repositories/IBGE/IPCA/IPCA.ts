@@ -112,7 +112,7 @@ export default class IPCA extends CleanClient {
     ];
   }
 
-  getLastMonths(quantity = 12, asString = true) {
+  getLastMonths(quantity = 12): string[] {
     const now = new Date();
     const months = [];
 
@@ -121,7 +121,7 @@ export default class IPCA extends CleanClient {
       months.push(`${past.getFullYear()}${String(past.getMonth() + 1).padStart(2, "0")}`);
     }
 
-    return asString ? months.join() : months;
+    return months;
   }
 
   mountURL({ variable, period, group }: URLParams) {

@@ -56,7 +56,7 @@ class IPCA7060 extends IPCA {
   fetch({ variable = [`63`], period = [`all`], group = [`7169`] }) {
     const url = super.mountURL({ variable, period, group });
 
-    return this.get({
+    return this.get<Record<string, string>[]>({
       endpoint: `${url}?formato=json`
     });
   }

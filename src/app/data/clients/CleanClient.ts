@@ -29,11 +29,19 @@ export default class CleanClient implements IClient {
       Object.entries(headers).map(([key, value]) => xhr.setRequestHeader(key, value))
       xhr.onload = function () {
         if (this.status >= 200 && this.status < 300) {
+          let data = xhr.response
           try {
-            resolve(JSON.parse(xhr.response));
+            data = JSON.parse(data)
           } catch (error) {
-            resolve(xhr.response);
+            data = xhr.response
           }
+
+          resolve({
+            data,
+            status: this.status,
+            statusText: xhr.statusText,
+            // headers: xhr.getAllResponseHeaders(),
+          });
         } else {
           reject({
             status: this.status,

@@ -31,9 +31,13 @@ function IncomesExpenses() {
     return patrimony * 0.01
   })
 
+  const { list } = useSelector((state: RootState) => state.ipca);
+  const ipcaAverage = parseFloat(
+    (list.reduce((acc, cur) => acc + parseFloat(cur.V), 0) / list.length).toFixed(2)
+  )
   //  0,32% = 0,0032
   let expensesSum = totalExpenses
-  const expenses = Array.from({ length: years * 12 }, () => expensesSum += (expensesSum * 0.0032))
+  const expenses = Array.from({ length: years * 12 }, () => expensesSum += (expensesSum * (ipcaAverage/100)))
 
   return (
     <>

@@ -33,8 +33,14 @@ export type LayoutState = {
   }
 };
 
+export type IPCAState = {
+  columns: { field: string; label: unknown; }[],
+  list: Record<string, string>[],
+}
+
 export type RootState = {
   auth: AuthState;
   balance: BalanceState;
   layout: LayoutState;
+  ipca: IPCAState;
 };

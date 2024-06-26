@@ -1,6 +1,7 @@
 import AppContext from "@/app/providers";
 import IncomesExpenses from "@/components/charts/IncomesExpenses";
 import { loadBalance } from "@/store/balance";
+import { loadLastMonths } from "@/store/ipca";
 import { RootState } from "@/store/state";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,7 +12,9 @@ function DashboardPage() {
   const { totalIncomes, totalExpenses } = useSelector((state: RootState) => state.balance);
 
   useEffect(() => {
+    console.log(`userEffect`);
     dispatch(loadBalance())
+    dispatch(loadLastMonths({}))
   }, [dispatch])
 
   return (

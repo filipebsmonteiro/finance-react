@@ -49,7 +49,7 @@ function PersonalAssetsForm() {
                   ? document.getElementById('save')?.click()
                   : null
                 }}
-                value={totalAssets}
+                defaultValue={totalAssets}
                 className="col-span-3"
               />
             }

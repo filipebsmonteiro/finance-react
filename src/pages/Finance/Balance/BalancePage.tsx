@@ -31,9 +31,9 @@ function BalancePage() {
     );
     newRecord.current = {
       id: uuid(),
-      type: null,
+      name: ``,
+      type: `income`,
       amount: 0,
-      description: ''
     };
   }, [dispatch]);
 
@@ -107,7 +107,7 @@ function BalancePage() {
                       <InputMoney
                         formatter={currency}
                         placeholder="Amount"
-                        value={record.amount}
+                        defaultValue={record.amount}
                         onChange={e => record.amount = e.target.value}
                       />
                     <div className="flex justify-between">

@@ -17,7 +17,7 @@ function AssetsPage() {
   useEffect(() => {
     dispatch(setTitle('Assets'));
     dispatch(loadAssets())
-  })
+  }, [dispatch])
 
   return (
     <>

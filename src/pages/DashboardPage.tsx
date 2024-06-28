@@ -1,18 +1,17 @@
 import AppContext from "@/app/providers";
 import IncomesExpenses from "@/components/charts/IncomesExpenses";
-import { loadBalance } from "@/store/balance";
+import { loadAssets, loadBalance } from "@/store/balance";
 import { loadLastMonths } from "@/store/ipca";
 import { RootState } from "@/store/state";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 function DashboardPage() {
-  // const [count, setCount] = useState(0)
   const dispatch = useDispatch()
   const { totalIncomes, totalExpenses } = useSelector((state: RootState) => state.balance);
 
   useEffect(() => {
-    console.log(`userEffect`);
+    dispatch(loadAssets())
     dispatch(loadBalance())
     dispatch(loadLastMonths({}))
   }, [dispatch])
@@ -20,8 +19,6 @@ function DashboardPage() {
   return (
     <AppContext.Consumer>
       {({ formatters : { currency } }) => <>
-        {/* <h1>Dashboard Page</h1> */}
-
         <div className="flex gap-4 my-4 w-full">
           <div className={`py-2 px-4 bg-white rounded-md flex-grow shadow-lg`}>
             <h3 className="text-2xl font-semibold mb-2 lg:mb-0">Incomes</h3>
@@ -33,7 +30,8 @@ function DashboardPage() {
           </div>
         </div>
 
-        <IncomesExpenses />
+        <h2 className="mt-16 font-bold text-center">Projection for the next 10 years</h2>
+        <IncomesExpenses years={10} />
       </>}
     </AppContext.Consumer>
   )

@@ -2,7 +2,7 @@ import constants from "@/app/constants";
 import AppContext from "@/app/providers";
 import { setTitle } from "@/store/layout";
 import { createRecord, updateRecord, deleteRecord, loadBalance } from "@/store/balance";
-import { BalanceRecord, RootState } from "@/store/state";
+import { BalanceRecord, BalanceType, RootState } from "@/store/state";
 import { FormEvent, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Pen, Trash2, X } from "lucide-react";
@@ -66,9 +66,9 @@ function BalancePage() {
     dispatch(createRecord(newRecord.current));
     newRecord.current = {
       id: uuid(),
-      type: null,
-      amount: 0,
-      description: ''
+      name: ``,
+      type: `income`,
+      amount: 0
     };
   };
   
@@ -89,7 +89,7 @@ function BalancePage() {
                 >
                   {record.isEditing
                   ? <div key={record.id} className="w-full max-w-sm space-y-2">
-                    <Select defaultValue={record.type} onValueChange={v => record.type = v}>
+                    <Select defaultValue={record.type} onValueChange={(v: BalanceType) => record.type = v}>
                       <SelectTrigger>
                         <SelectValue placeholder="Select type" />
                       </SelectTrigger>
@@ -108,7 +108,7 @@ function BalancePage() {
                         formatter={currency}
                         placeholder="Amount"
                         defaultValue={record.amount}
-                        onChange={e => record.amount = e.target.value}
+                        onChange={e => record.amount = parseFloat(e.target.value)}
                       />
                     <div className="flex justify-between">
                       <Button variant="outline" className="min-w-30" onClick={() => toggleEdit(record)}>Cancel</Button>
@@ -142,7 +142,10 @@ function BalancePage() {
               onSubmit={evt => handleNew(evt)}
               className="py-2 px-4 bg-white rounded-md my-2 flex justify-between items-center space-x-2"
             >
-              <Select onValueChange={e => updateNewRecord({...newRecord.current, type: e})}>
+              <Select onValueChange={(e: BalanceType) => updateNewRecord({
+                ...newRecord.current, type: e,
+                isEditing: false
+              } as RecordScreenI)}>
                 <SelectTrigger>
                   <SelectValue placeholder="Select type" />
                 </SelectTrigger>
@@ -154,12 +157,18 @@ function BalancePage() {
                 <Input
                   type="text"
                   placeholder="Name"
-                  onChange={e => updateNewRecord({...newRecord.current, name: e.currentTarget.value})}
+                  onChange={e => updateNewRecord({
+                    ...newRecord.current, name: e.currentTarget.value,
+                    isEditing: false
+                  } as RecordScreenI)}
                 />
                 <InputMoney
                   formatter={currency}
                   placeholder="Amount"
-                  onChange={({ target: { value } }) => updateNewRecord({...newRecord.current, amount: value})}
+                  onChange={({ target: { value } }) => updateNewRecord({
+                    ...newRecord.current, amount: parseFloat(value),
+                    isEditing: false
+                  } as RecordScreenI)}
                 />
               <div className="flex justify-between">
                 <Button type="submit" className="min-w-[10rem]">Add New</Button>

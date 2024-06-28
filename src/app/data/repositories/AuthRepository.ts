@@ -1,14 +1,9 @@
 import {
   AuthProvider,
-  FacebookAuthProvider,
-  GithubAuthProvider,
   GoogleAuthProvider,
   OAuthProvider,
-  reauthenticateWithPopup,
   signInWithPopup,
-  signInWithRedirect,
   signOut,
-  TwitterAuthProvider,
   UserCredential,
 } from "firebase/auth";
 import Firebase from "@/app/providers/firebase";

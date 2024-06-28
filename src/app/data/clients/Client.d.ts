@@ -24,10 +24,10 @@ export interface IOptions {
 }
 
 export interface IClient {
-  get<T = never, R = Response<T>>({ endpoint, params, body }: IOptions): Promise<R>;
-  post<T = never, R = Response<T>>({ endpoint, params, body }: IOptions): Promise<R>;
-  put<T = never, R = Response<T>>({ endpoint, params, body }: IOptions): Promise<R>;
-  patch<T = never, R = Response<T>>(params: IOptions): Promise<R>;
+  get<T = never>({ endpoint, params, body }: IOptions): Promise<Response<T>>;
+  post<T = never>({ endpoint, params, body }: IOptions): Promise<Response<T>>;
+  put<T = never>({ endpoint, params, body }: IOptions): Promise<Response<T>>;
+  patch<T = never>(params: IOptions): Promise<Response<T>>;
   delete({ endpoint, params, body }: IOptions): Promise<any>;
 }
 

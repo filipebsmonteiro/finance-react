@@ -13,6 +13,11 @@ type URLParams = {
   period: stringOrArray;
   group: stringOrArray;
 }
+type ValueType = string | number
+type LabelValue = {
+  label: string;
+  value: ValueType;
+}
 
 /**
  * Links:
@@ -24,7 +29,7 @@ type URLParams = {
 export default class IPCA extends CleanClient {
   protected $endpoint: string;
   protected $table: string | number;
-  protected $groups: { label: string, value: string }[];
+  protected $groups: LabelValue[];
   protected $territorial_levels: { label: string, value: number }[];
   
   protected $description: string = '';

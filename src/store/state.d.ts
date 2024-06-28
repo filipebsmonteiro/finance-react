@@ -6,10 +6,12 @@ export type AuthState = {
   user: User | null;
 };
 
+export type BalanceType = 'income' | 'expense';
+
 export type BalanceRecord = {
   id: string;
   name: string;
-  type: 'income' | 'expense';
+  type: BalanceType;
   amount: number;
 };
 

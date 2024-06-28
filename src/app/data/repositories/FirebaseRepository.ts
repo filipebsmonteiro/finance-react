@@ -1,6 +1,5 @@
 import { DatabaseReference, child, get, push, ref, remove, set } from "firebase/database";
 import Firebase from "@/app/providers/firebase";
-import store from "@/store";
 
 
 export class FirebaseRepository {

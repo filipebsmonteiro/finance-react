@@ -39,7 +39,7 @@ export const layout = createSlice({
     createRecord: (_state, { payload }) => {
       const { id, ...record } = payload;
       BalanceRepository.post(record)
-        .then(() => store.dispatch({ type: 'balance/loadBalance' }));
+      store.dispatch({ type: 'balance/loadBalance' })
     },
     addRecord: (state, { payload }) => {
       state.records.push({

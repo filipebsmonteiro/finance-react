@@ -4,7 +4,7 @@ import IPCA7060 from '@/app/data/repositories/IBGE/IPCA/IPCA7060';
 import store from '@/store';
 
 const initialState: IPCAState = {
-  columns: {},
+  columns: [{ field: '', label: '' }],
   list: [],
 };
 

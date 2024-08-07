@@ -1,45 +1,60 @@
 import {
     Menubar,
-    MenubarCheckboxItem,
     MenubarContent,
     MenubarItem,
     MenubarMenu,
-    MenubarRadioGroup,
-    MenubarRadioItem,
     MenubarSeparator,
     MenubarShortcut,
-    MenubarSub,
-    MenubarSubContent,
-    MenubarSubTrigger,
     MenubarTrigger,
-    MenubarLabel
 } from "@/components/ui/menubar"
-import viteLogo from '/vite.svg'
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "@/store";
-import { toggleSidebar } from "@/store/layout";
-import { Menu } from "lucide-react";
+import { logout } from "@/store/auth";
+import { RootState, UserAuth } from "@/store/state";
+import { LogOut } from "lucide-react";
+import { useDispatch, useSelector } from "react-redux";
 
 function Navbar() {
-    const dispatch = useDispatch<AppDispatch>();
+    const {
+        displayName,
+        photoURL,
+        email,
+        ...rest
+    } = useSelector((state: RootState) => state.auth.user) as UserAuth;
+    const dispatch = useDispatch();
 
+    console.log('rest :>> ', rest);
+    
     return (
-        <Menubar className="text-inherit justify-between px-2 py-6">
-            <MenubarMenu>
+        <Menubar className="flex justify-end text-inherit px-4 py-2 h-auto">
+            {/* <MenubarMenu>
                 <MenubarLabel className="w-60 flex justify-center">
                     <img src={viteLogo} className="logo" alt="Vite logo" />
                 </MenubarLabel>
-            </MenubarMenu>
+            </MenubarMenu> */}
 
             <MenubarMenu>
-                <div className="flex flex-1 justify-between">
-                    <MenubarLabel>
-                        <button onClick={() => dispatch(toggleSidebar())}>
-                            <Menu />
-                        </button>
-                    </MenubarLabel>
-                    <MenubarTrigger>File</MenubarTrigger>
+                {/* <div className=""> */}
+                    <MenubarTrigger className="p-0 rounded-full">
+                        <img
+                            src={photoURL}
+                            className="w-[50px] h-[50px] rounded-full"
+                            alt={`${displayName} Photo`}
+                        />
+                    </MenubarTrigger>
+
                     <MenubarContent>
+                        <MenubarItem>
+                            {displayName}
+                        </MenubarItem>
+                        <MenubarItem>
+                            {email}
+                        </MenubarItem>
+                        <MenubarSeparator />
+                        <MenubarItem onClick={() => dispatch(logout())}>
+                            Logout <MenubarShortcut><LogOut /></MenubarShortcut>
+                        </MenubarItem>
+                    </MenubarContent>
+
+                    {/* <MenubarContent>
                         <MenubarItem>
                             New Tab <MenubarShortcut>⌘T</MenubarShortcut>
                         </MenubarItem>
@@ -70,8 +85,8 @@ function Navbar() {
                             <MenubarRadioItem value="benoit">Benoit</MenubarRadioItem>
                             <MenubarRadioItem value="Luis">Luis</MenubarRadioItem>
                         </MenubarRadioGroup>
-                    </MenubarContent>
-                </div>
+                    </MenubarContent> */}
+                {/* </div> */}
             </MenubarMenu>
         </Menubar>
     )

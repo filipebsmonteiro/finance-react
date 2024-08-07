@@ -1,9 +1,15 @@
 import { User } from "firebase/auth";
 
+export type UserAuth = {
+  displayName: string
+  photoURL: string
+  email: string
+};
+
 export type AuthState = {
   loading: boolean;
   token: string | null;
-  user: User | null;
+  user: User | null | UserAuth;
 };
 
 export type BalanceType = 'income' | 'expense';

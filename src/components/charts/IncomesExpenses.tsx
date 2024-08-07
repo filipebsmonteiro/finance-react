@@ -1,6 +1,7 @@
 import { RootState } from '@/store/state';
-import { LineChart } from '@mui/x-charts/LineChart'
 import { useSelector } from 'react-redux';
+import Chart from "react-apexcharts";
+
 
 interface IncomesExpensesPropsI {
   years?: number
@@ -41,15 +42,52 @@ function IncomesExpenses({ years = 10, assets, incomes, expenses }: IncomesExpen
 
   return (
     <>
-      <LineChart
-        xAxis={[{ data: months, scaleType: 'point' }]}
+      <Chart
+        options={
+          {
+            // title: {
+            //   text: `10 Years Projection`
+            // },
+            // stroke: {
+            //   width: [5, 7, 5],
+            //   curve: 'straight',
+            //   dashArray: [0, 8, 5]
+            // },
+            chart: {
+              type: `line`,
+              zoom: {
+                enabled: true,
+                type: "x",
+                autoScaleYaxis: true,
+              },
+              height: 300
+            },
+            legend: {
+              labels: {}
+            },
+            xaxis: {
+              categories: months,
+            },
+            yaxis: {
+              decimalsInFloat: 2,
+              labels: {
+                
+              },
+            }
+          }
+        }
         series={[
-          // { data: asset, label: `Assets`, color: `blue` },
-          { data: incomesArray, label: `Incomes`, color: `#4ADE80` },
-          { data: expensesArray, label: `Expenses`, color: `#F87171` },
+          {
+            name: "Incomes",
+            data: incomesArray,
+            color: `#4ADE80`
+          },
+          {
+            name: "Expenses",
+            data: expensesArray,
+            color: `#F87171`
+          },
         ]}
-        width={1000}
-        height={300}
       />
     </>
   )
